@@ -119,3 +119,23 @@ systemctl enable squid
 service squid restart
 firewall-cmd --permanent --add-service=squid 
 firewall-cmd --reload
+
+
+
+SERVIDOR CLUSTER
+nmtui
+yum install nginx -y 
+yum install keepalived -y 
+service nginx start 
+systemctl enable nginx 
+firewall-cmd --permanent -add-service=http
+firewall-cmd --reload 
+echo “<h1> NODO 1</h1>” | tee /usr/shared/nginx/html/index.html
+echo “” | tee /etc/keepalived/keepalived.conf
+nano /etc/keepalived/keepalived.conf
+nano /bin/check_nginx.sh
+cmod 755 /bin/check_nginx.sh
+service keepalived start 
+service keepalived status 
+systemctl enable keepalived 
+service keepalived restart
